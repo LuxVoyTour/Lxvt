@@ -127,6 +127,8 @@
                     <option>Crypto</option>
                 </select>
                 <input type="hidden" name="_next" value="https://www.luxvoytour.co.uk/thank_you.html">
+                <input type="hidden" name="_subject" value="New Booking Request">
+                <input type="hidden" name="_autoresponse" value="Your booking has been received! We will contact you shortly.">
                 <button type="submit">Book Now</button>
             </form>
         </div>
@@ -252,21 +254,37 @@
     </div>
 
     <script>
-        // Review Form Handling
+        // Obsługa formularza rezerwacji
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Zapobiegaj domyślnemu wysłaniu formularza
+
+            // Wyświetl komunikat potwierdzający
+            alert('Thank you! Your booking has been submitted.');
+
+            // Opóźnione przekierowanie na stronę podziękowania
+            setTimeout(() => {
+                this.submit(); // Wyślij formularz
+            }, 2000); // Opóźnienie 2 sekundy
+        });
+
+        // Obsługa formularza recenzji
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Zapobiegaj domyślnemu wysłaniu formularza
+
             const name = this.elements.name.value;
             const review = this.elements.review.value;
-            
+
+            // Dodaj recenzję do strony
             const reviewDiv = document.createElement('div');
             reviewDiv.className = 'review';
             reviewDiv.innerHTML = `<strong>${name}</strong><p>${review}</p>`;
-            
             document.getElementById('reviews').prepend(reviewDiv);
-        });
 
-        // Booking Form Handling
-        document.getElementById('bookingForm').addEventListener('submit', function() {
-            // Optional: Add loading animation
+            // Wyczyść formularz
+            this.reset();
+
+            // Wyświetl komunikat
+            alert('Thank you for your review!');
         });
     </script>
 </body>
